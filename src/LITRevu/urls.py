@@ -16,11 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import index
+from LITRevu_app import views
+
+
 
 # chemin par defaut
 urlpatterns = [
-
-    path('', index, name="index"),
     path('admin/', admin.site.urls),
+    path('', views.login_view ),
+    path('login/', views.login_view),
+    path('signup/', views.signup_view),
+    path('flux/', views.flux_view),
+    path('suscribes/', views.suscribes_view),
+    path('create_ticket/', views.createTicket_view),
+    path('create_critical/', views.createTicket_view),
+    path('create_critical_response', views.createCriticalResponse_view),
+    path('post/', views.post_view),
+    path('edit_review/', views.editReview_view),
+    path('edit_ticket/', views.editTicket_view),
 ]
