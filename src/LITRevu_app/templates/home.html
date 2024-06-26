@@ -1,15 +1,35 @@
+
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
-</head>
+{% endblock %}
 
-<body>
-    <h1>Pouet</h1>
-</body>
+{% block content %}
+    <div class="messages">
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 
-</html>
+    <div class="register_section">
+        <h2>Inscrivez-vous maintenant</h2>
+        <a href="{% url 'register' %}"><button>S'inscrire</button></a>
+    </div>
+
+    <div class="login_section">
+        <h2>Connectez-vous</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Se connecter">
+        </form>
+    </div>
+
+    
+{% endblock %}

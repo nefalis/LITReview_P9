@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if user.is_authenticated %}
+        <p> Connecté sous {{ user.username }} | 
+        <a href="{% url 'logout' %}">Déconnexion</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Connexion</a> | 
+        <a href="{% url 'register' %}">Inscription</a></p>
+    {% endif %}
+
     <h1>flux </h1>
-</body>
-</html>
+
+    {% for ticket in tickets %} 
+        <article>  
+            <h2>titre: {{ ticket.title}}</h2>
+            <p>description: {{ ticket.description}}</p>
+            <p>date création : {{ ticket.time_created }}</p>
+            <img {{ ticket.image }}  />
+        </article>
+    {% endfor %}
+    
+</div>    
+{% endblock %}
+
+<!-- # image ne marche pas -->
