@@ -1,33 +1,19 @@
 {% extends "base.html" %}
-{% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
+{% load static tailwind_tags %}
 
 {% block content %}
 
 <div>
-    {% if user.is_authenticated %}
-        <p> Connecté sous {{ user.username }} | 
-        <a href="{% url 'logout' %}">Déconnexion</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Connexion</a> | 
-        <a href="{% url 'register' %}">Inscription</a></p>
-    {% endif %}
-
-    <h1>flux </h1>
-
     {% for ticket in tickets %} 
-        <article>  
+        <article class="border-4 border-cyan-600">  
             <h2>titre: {{ ticket.title}}</h2>
             <p>description: {{ ticket.description}}</p>
-            <p>date création : {{ ticket.time_created }}</p>
-            <img {{ ticket.image }}  />
+            {% if ticket.image %}
+                <img src="{{ ticket.image.url }}" alt="Image de {{ ticket.title }}">
+            {% endif %}
         </article>
     {% endfor %}
     
 </div>    
 {% endblock %}
-
-<!-- # image ne marche pas -->

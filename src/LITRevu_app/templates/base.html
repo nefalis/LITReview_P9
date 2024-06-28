@@ -1,25 +1,27 @@
-
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% tailwind_css %}
     <title>LITReview</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    {% block extra_css %} {% endblock %}
 </head>
-
 <body>
     <header>
-        <h1>LITReview</h1>
+        <h1 class="text-blue-900 border-2 bg-cyan-500 text-lg flex justify-center">LITReview</h1>
+        {% if request.path != '/' and request.path != '/register/' %}
+            <nav class="flex justify-center space-x-4">
+                <a href="{% url 'flux' %}" class="text-blue-700 hover:text-blue-900">Flux</a>
+                <a href="{% url 'create_ticket' %}" class="text-blue-700 hover:text-blue-900">Posts</a>
+                <a href="{% url 'suscribes' %}" class="text-blue-700 hover:text-blue-900">Abonnements</a>
+                <a href="{% url 'logout' %}" class="text-blue-700 hover:text-blue-900">Se déconnecter</a>
+            </nav>
+        {% endif %}
     </header>
-
     <main>
         {% block content %}{% endblock %}
     </main>
-
 </body>
-
 </html>

@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
+{% load static tailwind_tags %}
 
 {% block content %}
-
+    <h2>Créer un ticket</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-cyan-500 hover:bg-cyan-600">Envoyer</button>
+    </form>
 {% endblock %}

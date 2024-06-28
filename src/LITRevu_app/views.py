@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Ticket, Review, UserFollows
+from .forms import TicketForm
 
 
 def login_user(request):
@@ -17,7 +19,7 @@ def login_user(request):
             return redirect("flux")
         else:
             messages.info(request, "Identifiant ou mot de passe incorrect")
-
+        return render(request, 'home.html')
     form = AuthenticationForm()
     return render(request, "home.html", {"form": form})
 
@@ -48,8 +50,22 @@ def flux_view(request):
 def suscribes_view(request):
     return render(request, "suscribes.html")
 
+@login_required
 def createTicket_view(request):
-    return render(request, "create_ticket.html")
+    if request.method == 'POST':
+        form = TicketForm(request.POST, request.FILES)
+        if form.is_valid():
+            ticket = form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            return redirect('flux')
+    else:
+        form = TicketForm()
+
+    return render(request, "create_ticket.html", {'form': form})
+
+def deleteTicket_view(request):
+    return redirect('flux')
 
 def createCritical_view(request):
     return render(request, "create_critical.html")
