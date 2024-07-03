@@ -1,19 +1,57 @@
 {% extends "base.html" %}
-
 {% load static tailwind_tags %}
 
 {% block content %}
+    <div class="flex space-x-4 mb-4 container_button">
+        <a href="{% url 'create_ticket' %}" class="bg-cyan-500">Demander une critique</a>
+        <a href="{% url 'create_critical' %}" class="bg-cyan-500">Faire une critique</a>
+    </div>
 
-<div>
-    {% for ticket in tickets %} 
-        <article class="border-4 border-cyan-600">  
-            <h2>titre: {{ ticket.title}}</h2>
-            <p>description: {{ ticket.description}}</p>
-            {% if ticket.image %}
-                <img src="{{ ticket.image.url }}" alt="Image de {{ ticket.title }}">
+    <div class=" container_flux">
+        <div class="mb-8 container">
+            {% if items %}
+                {% for item in items %}
+                    {% if item.headline %}
+                        <article class=" border-4 border-cyan-600 review_container">
+                            <div class="mb-2 review_header">
+                                {% if item.user == request.user %}
+                                    Vous avez publié une critique - {{ item.time_created|date:"j F Y" }}
+                                {% else %}
+                                    {{ item.user.username }} a publié une critique - {{ item.time_created|date:"j F Y" }}
+                                {% endif %}
+                            </div>
+                            <div class="review_info">
+                                <h2>{{ item.headline }}</h2>
+                                <p class="review_rating">
+                                    {% for i in "12345" %}
+                                        <span class="{% if item.rating|default:0 >= forloop.counter %}filled{% endif %}">&#9733;</span>
+                                    {% endfor %}
+                                </p>
+                                <p class="review_body">{{ item.body }}</p>
+                            </div>
+                        </article>
+                    {% else %}
+                        <article class="border-4 border-cyan-600 ticket_container">
+                            <div class="  ticket_header">
+                                {% if item.user == request.user %}
+                                    Vous avez publié un ticket - {{ item.time_created|date:"j F Y" }}
+                                {% else %}
+                                    {{ item.user.username }} a publié un ticket - {{ item.time_created|date:"j F Y" }}
+                                {% endif %}
+                            </div>
+                            <h2>Titre: {{ item.title }}</h2>
+                            <p>Description: {{ item.description }}</p>
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="Image de {{ item.title }}">
+                            {% endif %}
+                        </article>
+
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>Aucun item trouvé.</p>
             {% endif %}
-        </article>
-    {% endfor %}
-    
-</div>    
+        </div>
+    </div>
+
 {% endblock %}

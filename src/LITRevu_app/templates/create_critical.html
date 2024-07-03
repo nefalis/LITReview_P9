@@ -1,10 +1,41 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-{% endblock %}
 
 {% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-4">Créer une critique</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <h2 class="text-xl font-bold mb-2">Livre / Article</h2>
+        <div class="mb-4">
+            {{ ticket_form.title.label_tag }}<br>
+            {{ ticket_form.title }}
+        </div>
+        <div class="mb-4">
+            {{ ticket_form.description.label_tag }}<br>
+            {{ ticket_form.description }}
+        </div>
+        <div class="mb-4">
+            {{ ticket_form.image.label_tag }}<br>
+            {{ ticket_form.image }}
+        </div>
+        
+        <h2 class="text-xl font-bold mb-2">Critique</h2>
+        <div class="mb-4">
+            {{ review_form.headline.label_tag }}<br>
+            {{ review_form.headline }}
+        </div>
 
+        <div class="mb-4">
+            {{ review_form.rating.label_tag }}<br>
+            {{ review_form.rating }}
+        </div>
+        <div class="mb-4">
+            {{ review_form.body.label_tag }}<br>
+            {{ review_form.body }}
+        </div>
+        
+        <button type="submit" class="bg-cyan-500 px-4 py-2 rounded">Envoyer</button>
+    </form>
+</div>
 {% endblock %}

@@ -20,6 +20,7 @@ urlpatterns = [
     path('create_critical_response', views.createCriticalResponse_view, name='create_critical_response'),
     path('post/', views.post_view, name='post'),
     path('edit_review/', views.editReview_view, name='edit_review'),
-    path('edit_ticket/', views.editTicket_view, name='edit_ticket'),
+    path('edit_ticket/<int:ticket_id>/', views.editTicket_view, name='edit_ticket'),
+    path('delete_ticket/<int:ticket_id>/', views.deleteTicket_view, name='delete_ticket'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

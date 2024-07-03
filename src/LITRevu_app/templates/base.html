@@ -14,7 +14,7 @@
         {% if request.path != '/' and request.path != '/register/' %}
             <nav class="flex justify-center space-x-4">
                 <a href="{% url 'flux' %}" class="text-blue-700 hover:text-blue-900">Flux</a>
-                <a href="{% url 'create_ticket' %}" class="text-blue-700 hover:text-blue-900">Posts</a>
+                <a href="{% url 'post' %}" class="text-blue-700 hover:text-blue-900">Posts</a>
                 <a href="{% url 'suscribes' %}" class="text-blue-700 hover:text-blue-900">Abonnements</a>
                 <a href="{% url 'logout' %}" class="text-blue-700 hover:text-blue-900">Se déconnecter</a>
             </nav>
