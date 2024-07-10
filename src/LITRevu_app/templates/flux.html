@@ -2,50 +2,102 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-    <div class="flex space-x-4 mb-4 container_button">
-        <a href="{% url 'create_ticket' %}" class="bg-cyan-500">Demander une critique</a>
-        <a href="{% url 'create_critical' %}" class="bg-cyan-500">Faire une critique</a>
+<div class="container">
+    <div class="flex space-x-4 mb-10 justify-center container_button">
+        <a href="{% url 'create_ticket' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Demander une critique</a>
+        <a href="{% url 'create_critical' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Faire une critique</a>
     </div>
 
-    <div class=" container_flux">
-        <div class="mb-8 container">
+    <div class="container_flux">
+
+        {% if messages %}
+        <div class="flex justify-center my-4">
+            <ul class="">
+                {% for message in messages %}
+                    <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <div class="mb-8 container space-y-8">
             {% if items %}
                 {% for item in items %}
                     {% if item.headline %}
-                        <article class=" border-4 border-cyan-600 review_container">
-                            <div class="mb-2 review_header">
+                        <article class="review_container bg-primary shadow-md flex justify-center flex-col rounded p-4  mb-8">
+                            <div class="my-2 review_header mr-4">
                                 {% if item.user == request.user %}
-                                    Vous avez publié une critique - {{ item.time_created|date:"j F Y" }}
+                                    <div class="flex justify-between">
+                                        <h2>Vous avez publié une critique</h2>
+                                        {{ item.time_created|date:"H:i, j F Y" }}
+                                    </div>
                                 {% else %}
-                                    {{ item.user.username }} a publié une critique - {{ item.time_created|date:"j F Y" }}
+                                    <div class="flex justify-between">
+                                        <h2>{{ item.user.username }} a publié une critique</h2>
+                                        {{ item.time_created|date:"H:i, j F Y" }}
+                                    </div>
                                 {% endif %}
                             </div>
-                            <div class="review_info">
-                                <h2>{{ item.headline }}</h2>
-                                <p class="review_rating">
+                            <div class="review_info my-2 flex flex-row font-semibold text-lg">
+                                <h2 class="mr-2">{{ item.headline }} - </h2>
+                                <p class="review_rating flex text-xl">
                                     {% for i in "12345" %}
-                                        <span class="{% if item.rating|default:0 >= forloop.counter %}filled{% endif %}">&#9733;</span>
+                                    <span class="text-cyan-200 {% if item.rating >= forloop.counter %}text-cyan-700{% endif %}">&#9733;</span>
                                     {% endfor %}
                                 </p>
-                                <p class="review_body">{{ item.body }}</p>
+                            </div>
+                            <p class="review_body">{{ item.body }}</p>
+
+                            <div class="ticket_critical_container shadow-md bg-secondary/50 flex justify-center flex-col rounded m-4 p-4">
+                                <div class="ticket_header mr-4 my-2">
+                                    {% if item.ticket.user == request.user %}
+                                        <div class="flex justify-between">
+                                            <h2>Vous avez publié un ticket</h2>
+                                            {{ item.ticket.time_created|date:"H:i, j F Y" }}
+                                        </div>
+                                    {% else %}
+                                        <div class="flex justify-between">
+                                            <h2>{{ item.ticket.user.username }} a publié un ticket</h2>
+                                            {{ item.ticket.time_created|date:"H:i, j F Y" }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="ticket_info my-2">
+                                    <h2 class="font-semibold">{{ item.ticket.title }}</h2>
+                                    <p>{{ item.ticket.description }}</p>
+                                    {% if item.ticket.image %}
+                                        <img src="{{ item.ticket.image.url }}" alt="Image de {{ item.ticket.title }}" class="w-1/3 mt-2">
+                                    {% endif %}
+                                </div>
                             </div>
                         </article>
                     {% else %}
-                        <article class="border-4 border-cyan-600 ticket_container">
-                            <div class="  ticket_header">
+                        <article class="ticket_container shadow-md bg-primary flex justify-center flex-col rounded mb-4 mt-4 p-4 ">
+                            <div class="ticket_header mr-4 my-2">
                                 {% if item.user == request.user %}
-                                    Vous avez publié un ticket - {{ item.time_created|date:"j F Y" }}
+                                    <div class="flex justify-between">
+                                        <h2>Vous avez publié un ticket</h2>
+                                        {{ item.time_created|date:"H:i, j F Y" }}
+                                    </div>
                                 {% else %}
-                                    {{ item.user.username }} a publié un ticket - {{ item.time_created|date:"j F Y" }}
+                                    <div class="flex justify-between">
+                                        <h2>{{ item.user.username }} a publié un ticket</h2>
+                                        {{ item.time_created|date:"H:i, j F Y" }}
+                                    </div>
                                 {% endif %}
                             </div>
-                            <h2>Titre: {{ item.title }}</h2>
-                            <p>Description: {{ item.description }}</p>
+                            <h2 class="font-semibold">{{ item.title }}</h2>
+                            <p>{{ item.description }}</p>
                             {% if item.image %}
-                                <img src="{{ item.image.url }}" alt="Image de {{ item.title }}">
+                                <img src="{{ item.image.url }}" alt="Image de {{ item.title }}" class="w-1/3 mt-2">
                             {% endif %}
+                            <div class="flex justify-end m-4">
+                                {% if not item.headline and item.user != request.user %}
+                                    <a href="{% url 'create_critical_response' item.id %}" class="bg-tertiary font-semibold hover:bg-secondary rounded p-2">Créer une critique</a>
+                                {% endif %}
+                            </div>
                         </article>
-
                     {% endif %}
                 {% endfor %}
             {% else %}
@@ -53,5 +105,5 @@
             {% endif %}
         </div>
     </div>
-
+</div>
 {% endblock %}

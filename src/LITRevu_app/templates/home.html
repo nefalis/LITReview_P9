@@ -3,29 +3,40 @@
 
 {% load static tailwind_tags %}
 {% block content %}
-    <div class="messages">
+<div class="home_container flex justify-center">
+
+    <div class="register_section m-10">
+        <h2 class="text-2xl mb-8 font-semibold">Inscrivez-vous maintenant</h2>
+        <a href="{% url 'register' %}" class="flex justify-center">
+            <button class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">S'inscrire</button>
+        </a>
+    </div>
+
+    <div class="login_section m-10 ">
+        <h2 class="text-2xl mb-10 flex justify-center font-semibold">Connectez-vous</h2>
+        <form method="post" class="w-96">
+            {% csrf_token %}
+            <div class="mb-4">
+                {{ form.username }}
+            </div>
+            <div class="mb-4">
+                {{ form.password }}
+            </div>
+            <div class="flex justify-end">
+                <input class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded" type="submit" value="Se connecter">
+            </div>
+        </form>
+
         {% if messages %}
-            <ul>
+        <div class="flex justify-center mt-4">
+            <ul class="">
                 {% for message in messages %}
-                    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                    <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
                 {% endfor %}
             </ul>
+        </div>
         {% endif %}
-    </div>
 
-    <div class="register_section">
-        <h2>Inscrivez-vous maintenant</h2>
-        <a href="{% url 'register' %}"><button class="bg-cyan-500 hover:bg-cyan-600">S'inscrire</button></a>
     </div>
-
-    <div class="login_section">
-        <h2>Connectez-vous</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input class="bg-cyan-500 hover:bg-cyan-600" type="submit" value="Se connecter">
-        </form>
-    </div>
-
-    
+</div>
 {% endblock %}

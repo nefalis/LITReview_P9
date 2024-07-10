@@ -6,41 +6,35 @@
 {% endblock %}
 
 {% block content %}
+<div class="register-container mt-8 w-2/4">
+    <h2 class="flex justify-center font-semibold text-2xl m-10">Inscrivez-vous</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="register-group mb-10 w-full">
+            {{ form.username }}
+            {% for error in form.username.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-    <div class="register-container">
-        <h2>Inscrivez-vous</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="register-group">
-                <label for="id_username">Nom d'utilisateur:</label>
-                {{ form.username }}
-                {% for error in form.username.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-            </div>
+        <div class="register-group mb-10 w-full">
+            {{ form.password1 }}
+            {% for error in form.password1.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="register-group">
-                <label for="id_password1">Mot de passe:</label>
-                {{ form.password1 }}
-                {% for error in form.password1.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-            </div>
+        <div class="register-group mb-10 w-full">
+            {{ form.password2 }}
+            {% for error in form.password2.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        </div>
 
-            <div class="register-group">
-                <label for="id_password2">Confirmez le mot de passe:</label>
-                {{ form.password2 }}
-                {% for error in form.password2.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
-            </div>
-
-            <div class="register_buttons">
-            <button type="button" onclick="window.history.back()" class="btn_back bg-cyan-500 hover:bg-cyan-600">Retourner</button>    
-            <input type="submit" value="S'inscrire" class="btn-submit bg-cyan-500 hover:bg-cyan-600">
-            
-            </div>
-        </form>
-    </div>
-    
+        <div class="register_buttons flex justify-end gap-4">
+            <button type="button" onclick="window.history.back()" class="bg-tertiary font-semibold hover:bg-secondary rounded py-2 px-7">Retourner</button>    
+            <input type="submit" value="S'inscrire" class="bg-tertiary font-semibold hover:bg-secondary rounded py-2 px-7">
+        </div>
+    </form>
+</div>
 {% endblock %}

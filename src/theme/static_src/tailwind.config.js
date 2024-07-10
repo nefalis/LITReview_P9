@@ -42,7 +42,17 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {        
+            colors: {
+                primary: '#e9fdfc',
+                secondary: '#defde0',
+                tertiary: '#c3dce5',
+
+        },
+            backgroundImage: {
+                'custom-gradient':' linear-gradient(to right top, #def3fd, #d6f7fc, #d2faf6, #d5fcec, #defde0)',
+          },
+    },
     },
     plugins: [
         /**

@@ -1,5 +1,4 @@
 {% load static tailwind_tags %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +9,22 @@
 </head>
 <body>
     <header>
-        <h1 class="text-blue-900 border-2 bg-cyan-500 text-lg flex justify-center">LITReview</h1>
-        {% if request.path != '/' and request.path != '/register/' %}
-            <nav class="flex justify-center space-x-4">
-                <a href="{% url 'flux' %}" class="text-blue-700 hover:text-blue-900">Flux</a>
-                <a href="{% url 'post' %}" class="text-blue-700 hover:text-blue-900">Posts</a>
-                <a href="{% url 'suscribes' %}" class="text-blue-700 hover:text-blue-900">Abonnements</a>
-                <a href="{% url 'logout' %}" class="text-blue-700 hover:text-blue-900">Se déconnecter</a>
-            </nav>
-        {% endif %}
+        <div class="flex justify-between items-center m-5 p-6 bg-custom-gradient rounded container_header">
+            <div class="flex-1"></div>
+            <h1 class="text-3xl font-bold text-center title_header">LITReview</h1>
+            <div class="flex-1 flex justify-end">
+                {% if request.path != '/' and request.path != '/register/' %}
+                    <nav class="flex space-x-4  nav_header">
+                        <a href="{% url 'flux' %}" class=" hover:text-cyan-600 font-medium ">Flux</a>
+                        <a href="{% url 'post' %}" class=" hover:text-cyan-600 font-medium ">Posts</a>
+                        <a href="{% url 'subscribes' %}" class=" hover:text-cyan-600 font-medium ">Abonnements</a>
+                        <a href="{% url 'logout' %}" class=" hover:text-cyan-600 font-medium ">Se déconnecter</a>
+                    </nav>
+                {% endif %}
+            </div>
+        </div>
     </header>
-    <main>
+    <main class="flex justify-center">
         {% block content %}{% endblock %}
     </main>
 </body>

@@ -1,41 +1,65 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-4">Créer une critique</h1>
-    <form method="post" enctype="multipart/form-data">
+<div class="container px-4 py-8 flex justify-center flex-col">
+    <h1 class="text-2xl flex justify-center font-bold mb-4">Créer une critique</h1>
+    <form method="post" enctype="multipart/form-data" class="p-8 ">
         {% csrf_token %}
         
-        <h2 class="text-xl font-bold mb-2">Livre / Article</h2>
-        <div class="mb-4">
-            {{ ticket_form.title.label_tag }}<br>
-            {{ ticket_form.title }}
-        </div>
-        <div class="mb-4">
-            {{ ticket_form.description.label_tag }}<br>
-            {{ ticket_form.description }}
-        </div>
-        <div class="mb-4">
-            {{ ticket_form.image.label_tag }}<br>
-            {{ ticket_form.image }}
-        </div>
-        
-        <h2 class="text-xl font-bold mb-2">Critique</h2>
-        <div class="mb-4">
-            {{ review_form.headline.label_tag }}<br>
-            {{ review_form.headline }}
+        <div class="container_ticket">
+            <h2 class="text-xl font-bold mb-6">Livre / Article</h2>
+            <div class="mb-4 text-lg mx-6 font-semibold">
+                {{ ticket_form.title.label_tag }}<br>
+                {{ ticket_form.title }}
+            </div>
+            <div class="mb-4 text-lg mx-6 font-semibold">
+                {{ ticket_form.description.label_tag }}<br>
+                {{ ticket_form.description }}
+            </div>
+            <div class="mb-4 mx-6 text-lg font-semibold mt-2">
+                {{ ticket_form.image.label_tag }}<br>
+                <div class="mt-6">
+                    <div class="hidden">
+                        {{ ticket_form.image }}
+                    </div>
+                    <label for="file-input" class="cursor-pointer mt-2 bg-tertiary hover:bg-secondary px-4 py-2 rounded">
+                        Télécharger fichier
+                    </label>
+                </div>
+            </div>
         </div>
 
-        <div class="mb-4">
-            {{ review_form.rating.label_tag }}<br>
-            {{ review_form.rating }}
-        </div>
-        <div class="mb-4">
-            {{ review_form.body.label_tag }}<br>
-            {{ review_form.body }}
-        </div>
-        
-        <button type="submit" class="bg-cyan-500 px-4 py-2 rounded">Envoyer</button>
-    </form>
+        <div class="container_critical mt-10">
+            <h2 class="text-xl font-bold mb-6">Critique</h2>
+            <div class="mb-4 mx-6 text-lg font-semibold">
+                {{ review_form.headline.label_tag }}<br>
+                {{ review_form.headline }}
+            </div>
+
+            <div class="mb-6 mx-6 text-lg font-semibold flex flex-col">
+                {{ review_form.rating.label_tag }}
+                <div class="ml-8 mt-4 flex flex-row space-x-20 font-semibold" id="id_rating">
+                    {% for radio in review_form.rating %}
+                    <label for="{{ radio.id_for_label }}" class="flex items-center">
+                        {{ radio.tag }}
+                        <span class="mx-1">-</span>
+                        <span class="ml-1">{{ radio.choice_label }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="mb-4 mx-6 text-lg font-semibold">
+                {{ review_form.body.label_tag }}<br>
+                {{ review_form.body }}
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="submit" class="bg-tertiary hover:bg-secondary px-10 py-2 rounded font-semibold">Envoyer</button>
+            </div> 
+    </div>
+
+    </form>    
+    
 </div>
 {% endblock %}

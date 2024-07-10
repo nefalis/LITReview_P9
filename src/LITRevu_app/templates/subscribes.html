@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static tailwind_tags %}
+
+
+{% block content %}
+<div class="subscribes_container  m-8 w-11/12 ">
+
+    <div class="search_follow_container ">
+        <h2 class="text-xl mb-4 flex justify-center">Suivre d'autres utilisateurs</h2>
+
+        <form method="post" action="{% url 'follow_user' %}" class="flex justify-center">
+            {% csrf_token %}
+            <input type="text" id="username" name="username" class=" border-4 w-8/12 border-tertiary rounded-md " placeholder="Nom d'utilisateur">
+            <button type="submit" class=" ml-2 bg-tertiary font-medium hover:bg-secondary  px-3 w-40 rounded">Envoyer</button>
+        </form>
+
+        {% if messages %}
+        <div class="flex justify-center mt-4">
+            <ul class="w-8/12">
+                {% for message in messages %}
+                    <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <div class="follow_container">
+        <h2 class="text-lg mt-8 flex justify-center">Abonnements</h2>
+        <ul>
+            {% for subscription in subscriptions %}
+                <li class="mt-2 mx-20 pl-4 border-4 border-tertiary flex justify-between   rounded items-center">
+                    {{ subscription.followed_user.username }}
+                    <form method="post" action="{% url 'unfollow_user' subscription.followed_user.id %}" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-2 flex justify-center">Désabonner</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="follower_container flex justify-center flex-col">
+        <h2 class="text-lg mt-8 flex justify-center">Abonnés</h2>
+        <ul>
+            {% for follower in followers %}
+                <li class=" border-4 border-tertiary mt-2 mx-20 p-2">
+                    {{ follower.user.username }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
