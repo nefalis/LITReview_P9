@@ -15,16 +15,16 @@
             <div class="flex-1 flex justify-end">
                 {% if request.path != '/' and request.path != '/register/' %}
                     <nav class="flex space-x-4  nav_header">
-                        <a href="{% url 'flux' %}" class=" hover:text-cyan-600 font-medium ">Flux</a>
-                        <a href="{% url 'post' %}" class=" hover:text-cyan-600 font-medium ">Posts</a>
-                        <a href="{% url 'subscribes' %}" class=" hover:text-cyan-600 font-medium ">Abonnements</a>
-                        <a href="{% url 'logout' %}" class=" hover:text-cyan-600 font-medium ">Se déconnecter</a>
+                        <a href="{% url 'flux' %}" class=" hover:text-blue-700 font-medium ">Flux</a>
+                        <a href="{% url 'post' %}" class=" hover:text-blue-700 font-medium ">Posts</a>
+                        <a href="{% url 'subscribes' %}" class=" hover:text-blue-700 font-medium ">Abonnements</a>
+                        <a href="{% url 'logout' %}" class=" hover:text-blue-700 font-medium ">Se déconnecter</a>
                     </nav>
                 {% endif %}
             </div>
         </div>
     </header>
-    <main class="flex justify-center">
+    <main class="flex justify-center mb-16 mx-10">
         {% block content %}{% endblock %}
     </main>
 </body>

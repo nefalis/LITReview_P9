@@ -1,6 +1,6 @@
 from django import forms
 from .models import Ticket, Review
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 
 class AuthenticationForm(AuthenticationForm):
@@ -15,22 +15,24 @@ class AuthenticationForm(AuthenticationForm):
             'placeholder': 'Mot de passe'})
     )
 
+
 class registerForm(UserCreationForm):
-        username = forms.CharField(
+    username = forms.CharField(
         widget=forms.TextInput(attrs={
             'class': 'form-control border-4 border-tertiary rounded-md w-full text-center',
             'placeholder': 'Nom d\'utilisateur'})
     )
-        password1 = forms.CharField(
+    password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control border-4 border-tertiary rounded-md w-full text-center',
             'placeholder': 'Mot de passe'})
     )
-        password2 = forms.CharField(
+    password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'class': 'form-control border-4 border-tertiary rounded-md w-full text-center',
             'placeholder': 'Confirmez le mot de passe'})
     )
+
 
 class TicketForm(forms.ModelForm):
     class Meta:
@@ -48,11 +50,12 @@ class TicketForm(forms.ModelForm):
             'description': forms.Textarea(attrs={
                 'class': 'border-4 border-tertiary mt-2 w-11/12 font-semibold',
                 'placeholder': 'Ajoutez une description détaillée'}),
-            'image' : forms.ClearableFileInput(attrs={
+            'image': forms.ClearableFileInput(attrs={
                 'class': 'mt-2 hidden border-4 border-tiercary',
                 'id': 'file-input',
             })
         }
+
 
 class ReviewForm(forms.ModelForm):
     class Meta:

@@ -33,7 +33,7 @@
                                 <h2 class="mr-2">{{ item.headline }} - </h2>
                                 <p class="review_rating flex text-xl">
                                     {% for i in "12345" %}
-                                    <span class="text-cyan-200 {% if item.rating >= forloop.counter %}text-cyan-700{% endif %}">&#9733;</span>
+                                    <span class="text-cyan-300 {% if item.rating >= forloop.counter %}text-cyan-800{% endif %}">&#9733;</span>
                                     {% endfor %}
                                 </p>
                             </div>   
