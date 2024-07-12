@@ -54,18 +54,27 @@ def logout_user(request):
 def flux_view(request):
     """ Affichage des tickets et critiques sur la page flux """
     # Avoir les utilisateurs que l'utilisateur actuel suit
-    followed_users = UserFollows.objects.filter(user=request.user).values_list('followed_user', flat=True)
+    followed_users = UserFollows.objects.filter(
+        user=request.user
+        ).values_list('followed_user', flat=True)
 
     # Avoir tickets et critiques de l'utilisateur et de ceux qu'il suit
-    tickets = Ticket.objects.filter(user__in=[request.user.id] + list(followed_users))
-    reviews = Review.objects.filter(user__in=[request.user.id] + list(followed_users))
+    tickets = Ticket.objects.filter(
+        user__in=[request.user.id] + list(followed_users)
+        )
+    reviews = Review.objects.filter(
+        user__in=[request.user.id] + list(followed_users)
+        )
 
     # Filtrer les tickets sans critiques
     tickets_with_reviews_ids = reviews.values_list('ticket_id', flat=True)
     tickets_without_reviews = tickets.exclude(id__in=tickets_with_reviews_ids)
 
     # Trier les items par date de création
-    items = sorted(list(tickets_without_reviews) + list(reviews), key=lambda x: x.time_created, reverse=True)
+    items = sorted(
+        list(tickets_without_reviews) + list(reviews),
+        key=lambda x: x.time_created, reverse=True
+        )
 
     context = {
         "items": items,
@@ -78,7 +87,10 @@ def subscribes_view(request):
     """ Affichage des abonnements """
     subscriptions = UserFollows.objects.filter(user=request.user)
     followers = UserFollows.objects.filter(followed_user=request.user)
-    return render(request, "subscribes.html", {"subscriptions": subscriptions, "followers": followers})
+    return render(request, "subscribes.html", {
+        "subscriptions": subscriptions,
+        "followers": followers
+        })
 
 
 @login_required
@@ -92,10 +104,16 @@ def follow_user(request):
             user_to_follow = User.objects.get(username=username)
             # verif que l'utilisateur ne suit pas la personne
             if user_to_follow != request.user:
-                UserFollows.objects.get_or_create(user=request.user, followed_user=user_to_follow)
-                messages.success(request, f"Vous suivez maintenant {username}.")
+                UserFollows.objects.get_or_create(
+                    user=request.user,
+                    followed_user=user_to_follow)
+                messages.success(
+                    request, f"Vous suivez maintenant {username}."
+                    )
             else:
-                messages.error(request, "Vous ne pouvez pas vous suivre vous-même.")
+                messages.error(
+                    request, "Vous ne pouvez pas vous suivre vous-même."
+                    )
         except User.DoesNotExist:
             messages.error(request, f"L'utilisateur {username} n'existe pas.")
         return redirect("subscribes")
@@ -106,10 +124,15 @@ def unfollow_user(request, user_id):
     """ Permet à l'utilisateur de ne plus suivre un autre utilisateur """
     # cherche l'utilisateur a ne plus suivre
     user_to_unfollow = User.objects.get(id=user_id)
-    follow_relation = UserFollows.objects.get(user=request.user, followed_user=user_to_unfollow)
+    follow_relation = UserFollows.objects.get(
+        user=request.user,
+        followed_user=user_to_unfollow
+    )
     # supprime la relation
     follow_relation.delete()
-    messages.success(request, f"Vous ne suivez plus {user_to_unfollow.username}.")
+    messages.success(
+        request, f"Vous ne suivez plus {user_to_unfollow.username}."
+    )
     return redirect("subscribes")
 
 
@@ -152,7 +175,9 @@ def createCritical_view(request):
         ticket_form = TicketForm()
         review_form = ReviewForm()
 
-    return render(request, "create_critical.html", {'ticket_form': ticket_form, 'review_form': review_form})
+    return render(request, "create_critical.html", {
+        'ticket_form': ticket_form, 'review_form': review_form
+        })
 
 
 @login_required
@@ -208,7 +233,10 @@ def editReview_view(request, review_id):
     else:
         form = ReviewForm(instance=review)
 
-    return render(request, "edit_review.html", {'form': form, 'ticket': ticket})
+    return render(
+        request, "edit_review.html",
+        {'form': form, 'ticket': ticket}
+        )
 
 
 @login_required
