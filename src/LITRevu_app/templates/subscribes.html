@@ -12,7 +12,7 @@
         <form method="post" action="{% url 'follow_user' %}" class="flex justify-center">
             {% csrf_token %}
             <input type="text" id="username" name="username" class=" border-4 w-8/12 border-tertiary rounded-md " placeholder="Nom d'utilisateur">
-            <button type="submit" class=" ml-2 bg-tertiary font-medium hover:bg-secondary  px-3 w-40 rounded">Envoyer</button>
+            <button type="submit" class=" ml-2 bg-tertiary font-medium hover:bg-secondary  px-3 w-40 rounded" title="Envoyer">Envoyer</button>
         </form>
 
         {% if messages %}
@@ -35,7 +35,7 @@
                     {{ subscription.followed_user.username }}
                     <form method="post" action="{% url 'unfollow_user' subscription.followed_user.id %}" class="inline">
                         {% csrf_token %}
-                        <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-2 flex justify-center">Désabonner</button>
+                        <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-2 flex justify-center" title="Désabonner">Désabonner</button>
                     </form>
                 </li>
             {% endfor %}

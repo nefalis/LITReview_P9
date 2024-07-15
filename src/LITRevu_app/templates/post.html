@@ -18,7 +18,7 @@
             {% if items %}
                 {% for item in items %}
                     {% if item.headline %}
-                        <article class="review_container bg-primary shadow-md flex justify-center flex-col rounded p-4  mb-8"> <!-- Added mb-8 for bottom margin -->
+                        <article class="review_container bg-primary shadow-md flex justify-center flex-col rounded p-4  mb-8">
                             <div class="my-2 review_header mr-4">
                                 <div class="flex justify-between">
                                     {% if item.user == request.user %}
@@ -58,15 +58,15 @@
                             </div>
 
                             <div class="flex justify-end space-x-4 m-4">
-                                <a href="{% url 'edit_review' item.id %}" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">Modifier</a>
+                                <a href="{% url 'edit_review' item.id %}" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center" title="Modifier">Modifier</a>
                                 <form action="{% url 'delete_review' item.id %}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette critique ?');">
                                     {% csrf_token %}
-                                    <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">Supprimer</button>
+                                    <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center" title="Supprimer">Supprimer</button>
                                 </form>
                             </div>
                         </article>
                     {% else %}
-                        <article class="ticket_container shadow-md bg-primary flex justify-center flex-col rounded mb-8 p-4"> <!-- Added mb-8 for bottom margin -->
+                        <article class="ticket_container shadow-md bg-primary flex justify-center flex-col rounded mb-8 p-4">
                             <div class="ticket_header mr-4 my-2">
                                 <div class="flex justify-between">
                                     {% if item.user == request.user %}
@@ -84,10 +84,10 @@
                                     <img src="{{ item.image.url }}" alt="Image de {{ item.title }}" class="w-1/3 mt-2">
                                 {% endif %}
                                 <div class="flex justify-end space-x-4 m-4">
-                                    <a href="{% url 'edit_ticket' item.id %}" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">Modifier</a>
+                                    <a href="{% url 'edit_ticket' item.id %}" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center" title="Modifier">Modifier</a>
                                     <form action="{% url 'delete_ticket' item.id %}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce ticket ?');">
                                         {% csrf_token %}
-                                        <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">Supprimer</button>
+                                        <button type="submit" class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center" title="Supprimer">Supprimer</button>
                                     </form>
                                 </div>
                             </div>

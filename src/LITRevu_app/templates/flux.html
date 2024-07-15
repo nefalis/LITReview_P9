@@ -4,8 +4,8 @@
 {% block content %}
 <div class="container_page">
     <div class="container_button flex space-x-4 mb-10 justify-center ">
-        <a href="{% url 'create_ticket' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Demander une critique</a>
-        <a href="{% url 'create_critical' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Faire une critique</a>
+        <a href="{% url 'create_ticket' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center" title="Demander une critique">Demander une critique</a>
+        <a href="{% url 'create_critical' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center" title="Faire une critique">Faire une critique</a>
     </div>
 
     <div class="container_flux">
@@ -94,7 +94,7 @@
                             {% endif %}
                             <div class="flex justify-end m-4">
                                 {% if not item.headline and item.user != request.user %}
-                                    <a href="{% url 'create_critical_response' item.id %}" class="button_create_critical bg-tertiary font-semibold hover:bg-secondary rounded p-2">Créer une critique</a>
+                                    <a href="{% url 'create_critical_response' item.id %}" class="button_create_critical bg-tertiary font-semibold hover:bg-secondary rounded p-2" title="Créer une critique">Créer une critique</a>
                                 {% endif %}
                             </div>
                         </article>
