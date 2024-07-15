@@ -15,7 +15,7 @@ L'application est développée en utilisant le framework Django et l'utilisation
 
 Pour ce projet, vous avez besoin d'avoir Python 🐍 d'installer sur votre ordinateur. Vous pouvez le télécharger depuis le site officiel de Python .
 
-### Téléchargement du repo
+### * Téléchargement du repo
 
 Créez un nouveau dossier sur votre bureau avec le nom que vous souhaitez
 - Télécharger le contenu du projet ou clonez le avec le lien suivant :
@@ -27,7 +27,7 @@ https://github.com/nefalis/LITReview_P9.git
 git clone https://github.com/nefalis/LITReview_P9.git
 ```
 
-### Configuration de l'environnement virtuel
+### * Configuration de l'environnement virtuel
 Mettez vous dans le dossier LITReview_P9 si vous n'y etes pas
 ```
 cd LITReview_P9
@@ -49,29 +49,32 @@ env\Scripts\activate
 source env/bin/activate
 ```
 
-### Installation des dépendances
+### * Installation des dépendances
 ```
 pip install -r requirements.txt
 ```
 
-### Effectuer les migrations de la base de données
-```
-python manage.py migrate
-```
+### * Mise en place du projet
 
-### Lancement du serveur
 Déplacez vous dans le dossier src
 ```
 cd src
 ```
 
-Lancement du serveur
+
+### * Effectuer les migrations de la base de données
+```
+python manage.py migrate
+```
+
+
+### * Lancement du serveur
 ```
 python manage.py runserver
 ```
 
 
-### Etape facultative
+### * Étape facultative
 Si vous souhaitez faire des modifications css, il vous faudra activé Tailwind sinon les modifications ne seront pas prise en compte
 - Ouvrez un nouveau terminal
 - Activez l'environnement virtuel au niveau du dossier 'LITReview_P9'
@@ -97,6 +100,13 @@ Entrer l'adresse suivante dans votre navigateur
  http:/127.0.0.1:8000/
 ```
 Il ne vous reste plus qu'à vous inscrire pour tester l'application
+
+Exemple d'utilisateur déjà présent
+
+Utilisateur : Luc
+
+Mot de passe : tutetute
+
 
 ## Auteur
 
