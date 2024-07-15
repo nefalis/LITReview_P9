@@ -15,10 +15,10 @@
             <div class="flex-1 flex justify-end">
                 {% if request.path != '/' and request.path != '/register/' %}
                     <nav class="nav_header flex space-x-4">
-                        <a href="{% url 'flux' %}" class=" hover:text-blue-700 font-medium ">Flux</a>
-                        <a href="{% url 'post' %}" class=" hover:text-blue-700 font-medium ">Posts</a>
-                        <a href="{% url 'subscribes' %}" class=" hover:text-blue-700 font-medium ">Abonnements</a>
-                        <a href="{% url 'logout' %}" class=" hover:text-blue-700 font-medium ">Se déconnecter</a>
+                        <a href="{% url 'flux' %}" class=" hover:text-blue-700 font-medium " title="Flux">Flux</a>
+                        <a href="{% url 'post' %}" class=" hover:text-blue-700 font-medium " title="Posts">Posts</a>
+                        <a href="{% url 'subscribes' %}" class=" hover:text-blue-700 font-medium " title="Abonnements">Abonnements</a>
+                        <a href="{% url 'logout' %}" class=" hover:text-blue-700 font-medium " title="Se connecter">Se déconnecter</a>
                     </nav>
                 {% endif %}
             </div>
