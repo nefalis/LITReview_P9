@@ -2,7 +2,7 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-    <div class="container_ticket mx-auto px-4 py-8">
+    <div class="container_ticket mx-auto px-4 py-8 w-9/12">
         <h2 class="text-2xl font-bold mb-4">Créer un ticket</h2>
         <form method="post" enctype="multipart/form-data" class="ticket_form space-y-4">
             {% csrf_token %}

@@ -942,12 +942,20 @@ select {
   width: 66.666667%;
 }
 
+.w-9\/12 {
+  width: 75%;
+}
+
 .w-96 {
   width: 24rem;
 }
 
 .w-full {
   width: 100%;
+}
+
+.w-10\/12 {
+  width: 83.333333%;
 }
 
 .flex-1 {

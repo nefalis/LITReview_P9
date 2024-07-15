@@ -6,14 +6,14 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 class AuthenticationForm(AuthenticationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'form-control border-4 border-tertiary rounded-md'
-            'w-96 text-center',
+            'class': 'form-control border-4 border-tertiary rounded-md w-96'
+            ' text-center',
             'placeholder': 'Nom d\'utilisateur'})
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'form-control border-4 border-tertiary rounded-md'
-            'w-96 text-center',
+            'class': 'form-control border-4 border-tertiary rounded-md w-96'
+            ' text-center',
             'placeholder': 'Mot de passe'})
     )
 
