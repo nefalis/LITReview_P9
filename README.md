@@ -70,6 +70,27 @@ Lancement du serveur
 python manage.py runserver
 ```
 
+
+### Etape facultative
+Si vous souhaitez faire des modifications css, il vous faudra activé Tailwind sinon les modifications ne seront pas prise en compte
+- Ouvrez un nouveau terminal
+- Activez l'environnement virtuel au niveau du dossier 'LITReview_P9'
+
+  Pour l'activé sous Windows
+  ```
+  env\Scripts\activate
+  ```
+  Pour l'activé sous Linux
+
+  ```
+  source env/bin/activate
+  ```
+- Déplacez vous dans le dossier 'src'
+- Activation de Tailwind
+  ```
+  python manage.py tailwind start
+  ```
+
 ## Visualisation de l'application
 Entrer l'adresse suivante dans votre navigateur
 ```
