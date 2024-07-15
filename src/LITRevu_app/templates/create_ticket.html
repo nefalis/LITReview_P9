@@ -2,19 +2,19 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-    <div class="container mx-auto px-4 py-8">
+    <div class="container_ticket mx-auto px-4 py-8">
         <h2 class="text-2xl font-bold mb-4">Créer un ticket</h2>
-        <form method="post" enctype="multipart/form-data" class="space-y-4">
+        <form method="post" enctype="multipart/form-data" class="ticket_form space-y-4">
             {% csrf_token %}
-            <div class="text-lg font-semibold">
+            <div class="ticket_title text-lg font-semibold">
                 <label class="block ">{{ form.title.label_tag }}</label>
                 {{ form.title }}
             </div>
-            <div class="text-lg font-semibold">
+            <div class="ticket_descrition text-lg font-semibold">
                 <label class="block ">{{ form.description.label_tag }}</label>
                 {{ form.description }}
             </div>
-            <div class="mb-4 text-lg font-semibold mt-2">
+            <div class="ticket_img mb-4 text-lg font-semibold mt-2">
                 {{ form.image.label_tag }}<br>
                 <div class="mt-6">
                     <div class="hidden">
@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-end">
+            <div class="ticket_submit flex justify-end">
                 <button type="submit" class="bg-tertiary hover:bg-secondary px-10 py-2 rounded font-semibold">Envoyer</button>
             </div> 
         </form>

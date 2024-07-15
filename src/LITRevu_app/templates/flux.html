@@ -2,8 +2,8 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-<div class="container">
-    <div class="flex space-x-4 mb-10 justify-center container_button">
+<div class="container_page">
+    <div class="container_button flex space-x-4 mb-10 justify-center ">
         <a href="{% url 'create_ticket' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Demander une critique</a>
         <a href="{% url 'create_critical' %}" class="bg-tertiary font-medium hover:bg-secondary w-60 p-3 rounded flex justify-center">Faire une critique</a>
     </div>
@@ -11,7 +11,7 @@
     <div class="container_flux">
 
         {% if messages %}
-        <div class="flex justify-center my-4">
+        <div class="message_flux flex justify-center my-4">
             <ul class="">
                 {% for message in messages %}
                     <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
@@ -20,12 +20,12 @@
         </div>
         {% endif %}
 
-        <div class="mb-8 container space-y-8">
+        <div class="container_list mb-8  space-y-8">
             {% if items %}
                 {% for item in items %}
                     {% if item.headline %}
                         <article class="review_container bg-primary shadow-md flex justify-center flex-col rounded p-4  mb-8">
-                            <div class="my-2 review_header mr-4">
+                            <div class="review_header my-2  mr-4">
                                 {% if item.user == request.user %}
                                     <div class="flex justify-between">
                                         <h2>Vous avez publié une critique</h2>
@@ -40,9 +40,9 @@
                             </div>
                             <div class="review_info my-2 flex flex-row font-semibold text-lg">
                                 <h2 class="mr-2">{{ item.headline }} - </h2>
-                                <p class="review_rating flex text-xl">
+                                <p class="review_rating flex text-xl ">
                                     {% for i in "12345" %}
-                                    <span class="text-cyan-200 {% if item.rating >= forloop.counter %}text-cyan-700{% endif %}">&#9733;</span>
+                                    <span class="text-star {% if item.rating >= forloop.counter %} text-starfull {% endif %}">&#9733;</span>
                                     {% endfor %}
                                 </p>
                             </div>
@@ -90,11 +90,11 @@
                             <h2 class="font-semibold">{{ item.title }}</h2>
                             <p>{{ item.description }}</p>
                             {% if item.image %}
-                                <img src="{{ item.image.url }}" alt="Image de {{ item.title }}" class="w-1/3 mt-2">
+                                <img src="{{ item.image.url }}" alt="Image de {{ item.title }}" class="ticket_img w-1/3 mt-2">
                             {% endif %}
                             <div class="flex justify-end m-4">
                                 {% if not item.headline and item.user != request.user %}
-                                    <a href="{% url 'create_critical_response' item.id %}" class="bg-tertiary font-semibold hover:bg-secondary rounded p-2">Créer une critique</a>
+                                    <a href="{% url 'create_critical_response' item.id %}" class="button_create_critical bg-tertiary font-semibold hover:bg-secondary rounded p-2">Créer une critique</a>
                                 {% endif %}
                             </div>
                         </article>

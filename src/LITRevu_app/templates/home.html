@@ -5,16 +5,16 @@
 {% block content %}
 <div class="home_container flex justify-center">
 
-    <div class="register_section m-10 ">
+    <div class="register_container m-10 ">
         <h2 class="text-2xl mb-8 font-semibold">Inscrivez-vous maintenant</h2>
-        <a href="{% url 'register' %}" class="flex justify-center">
+        <a href="{% url 'register' %}" class="register_link flex justify-center">
             <button class="bg-tertiary font-medium hover:bg-secondary w-40 p-3 rounded flex justify-center">S'inscrire</button>
         </a>
     </div>
 
-    <div class="login_section m-10 ">
+    <div class="login_container m-10 ">
         <h2 class="text-2xl mb-10 flex justify-center font-semibold">Connectez-vous</h2>
-        <form method="post" class="w-96">
+        <form method="post" class="login_form w-96">
             {% csrf_token %}
             <div class="mb-4">
                 {{ form.username }}
@@ -28,7 +28,7 @@
         </form>
 
         {% if messages %}
-        <div class="flex justify-center mt-4">
+        <div class="home_message flex justify-center mt-4">
             <ul class="">
                 {% for message in messages %}
                     <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>

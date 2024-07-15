@@ -6,7 +6,6 @@ from django.urls import path
 from LITRevu_app import views
 
 
-# chemin par defaut
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login_user, name='home'),
@@ -50,5 +49,4 @@ urlpatterns = [
         'unfollow_user/<int:user_id>/',
         views.unfollow_user, name='unfollow_user'
         ),
-]
-+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

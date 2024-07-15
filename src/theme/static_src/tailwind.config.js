@@ -47,11 +47,13 @@ module.exports = {
                 primary: '#e9fdfc',
                 secondary: '#defde0',
                 tertiary: '#c3dce5',
+                star: '#707070',
+                starfull: '#0052cc',
 
         },
             backgroundImage: {
                 'custom-gradient':' linear-gradient(to right top, #def3fd, #d6f7fc, #d2faf6, #d5fcec, #defde0)',
-          },
+        },
     },
     },
     plugins: [

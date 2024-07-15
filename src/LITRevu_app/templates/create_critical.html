@@ -3,20 +3,20 @@
 {% block content %}
 <div class="container px-4 py-8 flex justify-center flex-col">
     <h1 class="text-2xl flex justify-center font-bold mb-4">Créer une critique</h1>
-    <form method="post" enctype="multipart/form-data" class="p-8 ">
+    <form method="post" enctype="multipart/form-data" class="container_form p-8 ">
         {% csrf_token %}
         
         <div class="container_ticket">
             <h2 class="text-xl font-bold mb-6">Livre / Article</h2>
-            <div class="mb-4 text-lg mx-6 font-semibold">
+            <div class="ticket_title mb-4 text-lg mx-6 font-semibold">
                 {{ ticket_form.title.label_tag }}<br>
                 {{ ticket_form.title }}
             </div>
-            <div class="mb-4 text-lg mx-6 font-semibold">
+            <div class="ticket_description mb-4 text-lg mx-6 font-semibold">
                 {{ ticket_form.description.label_tag }}<br>
                 {{ ticket_form.description }}
             </div>
-            <div class="mb-4 mx-6 text-lg font-semibold mt-2">
+            <div class="ticket_img mb-4 mx-6 text-lg font-semibold mt-2">
                 {{ ticket_form.image.label_tag }}<br>
                 <div class="mt-6">
                     <div class="hidden">
@@ -31,12 +31,12 @@
 
         <div class="container_critical mt-10">
             <h2 class="text-xl font-bold mb-6">Critique</h2>
-            <div class="mb-4 mx-6 text-lg font-semibold">
+            <div class="critical_title mb-4 mx-6 text-lg font-semibold">
                 {{ review_form.headline.label_tag }}<br>
                 {{ review_form.headline }}
             </div>
 
-            <div class="mb-6 mx-6 text-lg font-semibold flex flex-col">
+            <div class="critical_rating mb-6 mx-6 text-lg font-semibold flex flex-col">
                 {{ review_form.rating.label_tag }}
                 <div class="ml-8 mt-4 flex flex-row space-x-20 font-semibold" id="id_rating">
                     {% for radio in review_form.rating %}
@@ -49,12 +49,12 @@
                 </div>
             </div>
 
-            <div class="mb-4 mx-6 text-lg font-semibold">
+            <div class="critical_description mb-4 mx-6 text-lg font-semibold">
                 {{ review_form.body.label_tag }}<br>
                 {{ review_form.body }}
             </div>
             
-            <div class="flex justify-end">
+            <div class="critical_submit flex justify-end">
                 <button type="submit" class="bg-tertiary hover:bg-secondary px-10 py-2 rounded font-semibold">Envoyer</button>
             </div> 
     </div>

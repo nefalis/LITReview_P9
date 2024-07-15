@@ -16,18 +16,18 @@
             <h2 class="font-semibold">{{ ticket.title }}</h2>
             <p>{{ ticket.description }}</p>
             {% if ticket.image %}
-                <img src="{{ ticket.image.url }}" alt="Image de {{ ticket.title }}" class="w-1/3 mt-2">
+                <img src="{{ ticket.image.url }}" alt="Image de {{ ticket.title }}" class="ticket_img w-1/3 mt-2">
             {% endif %}
         </div>
     </div>
     
-    <form method="post" enctype="multipart/form-data" class="space-y-4">
+    <form method="post" enctype="multipart/form-data" class="critical_container space-y-4">
         {% csrf_token %}
-        <div class="text-lg font-semibold">
+        <div class="critical_title text-lg font-semibold">
             <label class="block">{{ review_form.headline.label_tag }}</label>
             {{ review_form.headline }}
         </div>
-        <div class="mb-6  text-lg font-semibold flex flex-col">
+        <div class="critical_rating mb-6  text-lg font-semibold flex flex-col">
             {{ review_form.rating.label_tag }}
             <div class="ml-8 mt-4 flex flex-row space-x-20 font-semibold" id="id_rating">
                 {% for radio in review_form.rating %}
@@ -40,11 +40,11 @@
             </div>
         </div>
 
-        <div class="text-lg font-semibold">
+        <div class="critical_description text-lg font-semibold">
             <label class="block">{{ review_form.body.label_tag }}</label>
             {{ review_form.body }}
         </div>
-        <div class="flex justify-end">
+        <div class="button_submit flex justify-end">
             <button type="submit" class="bg-tertiary hover:bg-secondary px-10 py-2 rounded font-semibold">Envoyer</button>
         </div>
     </form>

@@ -9,12 +9,12 @@
 </head>
 <body>
     <header>
-        <div class="flex justify-between items-center m-5 p-6 bg-custom-gradient rounded container_header">
+        <div class="container_header flex justify-between items-center m-5 p-6 bg-custom-gradient rounded ">
             <div class="flex-1"></div>
-            <h1 class="text-3xl font-bold text-center title_header">LITReview</h1>
+            <h1 class="title_header text-3xl font-bold text-center ">LITReview</h1>
             <div class="flex-1 flex justify-end">
                 {% if request.path != '/' and request.path != '/register/' %}
-                    <nav class="flex space-x-4  nav_header">
+                    <nav class="nav_header flex space-x-4">
                         <a href="{% url 'flux' %}" class=" hover:text-blue-700 font-medium ">Flux</a>
                         <a href="{% url 'post' %}" class=" hover:text-blue-700 font-medium ">Posts</a>
                         <a href="{% url 'subscribes' %}" class=" hover:text-blue-700 font-medium ">Abonnements</a>

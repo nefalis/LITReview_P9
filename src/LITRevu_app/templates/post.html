@@ -3,13 +3,13 @@
 
 {% block content %}
     <div class="container_post flex justify-center w-11/12">
-        <div class="mt-10 space-y-8 container">
+        <div class="container mt-10 space-y-8 ">
             
             {% if messages %}
             <div class="flex justify-center mt-4">
-                <ul class="">
+                <ul class="message-list">
                     {% for message in messages %}
-                        <li class="{% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
+                        <li class="message {% if message.tags %} {{ message.tags }} {% endif %} p-2 rounded-md border-2 border-tertiary mt-2">{{ message }}</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -33,10 +33,10 @@
                                 <h2 class="mr-2">{{ item.headline }} - </h2>
                                 <p class="review_rating flex text-xl">
                                     {% for i in "12345" %}
-                                    <span class="text-cyan-300 {% if item.rating >= forloop.counter %}text-cyan-800{% endif %}">&#9733;</span>
+                                    <span class="text-gray-500 {% if item.rating >= forloop.counter %}text-black {% endif %}">&#9733;</span>
                                     {% endfor %}
                                 </p>
-                            </div>   
+                            </div>
                             <p class="review_body font-semibold">{{ item.body }}</p>
 
                             <div class="ticket_critical_container shadow-md bg-secondary/50 flex justify-center flex-col rounded m-4 p-4">
@@ -66,7 +66,7 @@
                             </div>
                         </article>
                     {% else %}
-                        <article class="shadow-md bg-primary flex justify-center flex-col rounded mb-8 p-4 ticket_container"> <!-- Added mb-8 for bottom margin -->
+                        <article class="ticket_container shadow-md bg-primary flex justify-center flex-col rounded mb-8 p-4"> <!-- Added mb-8 for bottom margin -->
                             <div class="ticket_header mr-4 my-2">
                                 <div class="flex justify-between">
                                     {% if item.user == request.user %}

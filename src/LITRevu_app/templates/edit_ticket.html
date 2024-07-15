@@ -3,19 +3,21 @@
 {% load static tailwind_tags %}
 
 {% block content %}
-    <div class="container mx-auto px-4 py-8">
+    <div class="container_edit_ticket mx-auto px-4 py-8">
+
         <h2 class="text-2xl font-bold mb-4">Modifier votre ticket</h2>
-        <form method="post" enctype="multipart/form-data" class="space-y-4">
+
+        <form method="post" enctype="multipart/form-data" class="container_ticket space-y-4">
             {% csrf_token %}
-            <div class="text-lg font-semibold">
+            <div class="edit_ticket_title text-lg font-semibold">
                 <label class="block ">{{ form.title.label_tag }}</label>
                 {{ form.title }}
             </div>
-            <div class="text-lg font-semibold">
+            <div class="edit_ticket_description text-lg font-semibold">
                 <label class="block ">{{ form.description.label_tag }}</label>
                 {{ form.description }}
             </div>
-            <div class="mb-4 text-lg font-semibold mt-2">
+            <div class="edit_ticket_img mb-4 text-lg font-semibold mt-2">
                 <label class="block">{{ form.image.label_tag }}</label>
                 {% if form.image.value %}
                     <div class="mt-6">
@@ -23,16 +25,18 @@
                     </div>
                 {% endif %}
                 <div class="mt-6">
-                    <div class="clearable-file-input hidden">
+                    <div class="hidden">
                         {{ form.image }}
                     </div>
                     <label for="{{ form.image.id_for_label }}" class="cursor-pointer mt-2 bg-tertiary hover:bg-secondary px-4 py-2 rounded">
                         Télécharger fichier
                     </label>
                 </div>
-            <div class="flex justify-end">
+            </div>
+            <div class="edit_ticket_button flex justify-end">
                 <button type="submit" class="bg-tertiary hover:bg-secondary px-10 py-2 rounded font-semibold">Envoyer</button>
             </div>
         </form>
+
     </div>
 {% endblock %}

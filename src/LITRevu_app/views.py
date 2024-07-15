@@ -30,10 +30,8 @@ def login_user(request):
 
 def register_user(request):
     """ Gestion de l'inscription utilisateur """
-    # creation formulaire creation utilisateur
     if request.method == "POST":
         form = registerForm(request.POST)
-        # si valide on sauvegarde, connecte et envoyer sur flux
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -53,12 +51,9 @@ def logout_user(request):
 @login_required
 def flux_view(request):
     """ Affichage des tickets et critiques sur la page flux """
-    # Avoir les utilisateurs que l'utilisateur actuel suit
     followed_users = UserFollows.objects.filter(
         user=request.user
         ).values_list('followed_user', flat=True)
-
-    # Avoir tickets et critiques de l'utilisateur et de ceux qu'il suit
     tickets = Ticket.objects.filter(
         user__in=[request.user.id] + list(followed_users)
         )
@@ -66,11 +61,9 @@ def flux_view(request):
         user__in=[request.user.id] + list(followed_users)
         )
 
-    # Filtrer les tickets sans critiques
     tickets_with_reviews_ids = reviews.values_list('ticket_id', flat=True)
     tickets_without_reviews = tickets.exclude(id__in=tickets_with_reviews_ids)
 
-    # Trier les items par date de création
     items = sorted(
         list(tickets_without_reviews) + list(reviews),
         key=lambda x: x.time_created, reverse=True
@@ -97,12 +90,9 @@ def subscribes_view(request):
 def follow_user(request):
     """ Gestion de suivi des utilisateurs entre eux """
     if request.method == "POST":
-        # on récupere le nom utilisateur du formulaire
         username = request.POST.get("username")
         try:
-            # cherche l'utilisateur
             user_to_follow = User.objects.get(username=username)
-            # verif que l'utilisateur ne suit pas la personne
             if user_to_follow != request.user:
                 UserFollows.objects.get_or_create(
                     user=request.user,
@@ -122,13 +112,11 @@ def follow_user(request):
 @login_required
 def unfollow_user(request, user_id):
     """ Permet à l'utilisateur de ne plus suivre un autre utilisateur """
-    # cherche l'utilisateur a ne plus suivre
     user_to_unfollow = User.objects.get(id=user_id)
     follow_relation = UserFollows.objects.get(
         user=request.user,
         followed_user=user_to_unfollow
     )
-    # supprime la relation
     follow_relation.delete()
     messages.success(
         request, f"Vous ne suivez plus {user_to_unfollow.username}."
@@ -140,11 +128,9 @@ def unfollow_user(request, user_id):
 def createTicket_view(request):
     """ Gestion de la création d'un ticket """
     if request.method == 'POST':
-        # creation formulaire ticket
         form = TicketForm(request.POST, request.FILES)
         if form.is_valid():
             ticket = form.save(commit=False)
-            # assigne l'utilisateur au ticket
             ticket.user = request.user
             ticket.save()
             return redirect('flux')
@@ -158,9 +144,7 @@ def createTicket_view(request):
 def createCritical_view(request):
     """ Permet a l'utilisateur de créer une critique """
     if request.method == 'POST':
-        # crée un formulaire ticket
         ticket_form = TicketForm(request.POST, request.FILES)
-        # crée un formulaire critique
         review_form = ReviewForm(request.POST)
         if ticket_form.is_valid() and review_form.is_valid():
             ticket = ticket_form.save(commit=False)
@@ -208,11 +192,9 @@ def createCriticalResponse_view(request, ticket_id):
 @login_required
 def post_view(request):
     """ Affichage des tickets et critique de l'utilisateur sur la page post """
-    # recupère ticket et critique de l'utilisateur
     user_tickets = Ticket.objects.filter(user=request.user)
     user_reviews = Review.objects.filter(user=request.user)
     items = list(user_tickets) + list(user_reviews)
-    # Trier par date de création
     items.sort(key=lambda x: x.time_created, reverse=True)
     return render(request, "post.html", {"items": items})
 
@@ -251,9 +233,7 @@ def deleteReview_view(request, review_id):
 @login_required
 def editTicket_view(request, ticket_id):
     """ Permet la modifier un ticket """
-    # recupere le ticket par son id
     ticket = Ticket.objects.get(id=ticket_id)
-    # verif que le ticket appartient a l'utilisateur
     if ticket.user != request.user:
         return redirect('post')
 
