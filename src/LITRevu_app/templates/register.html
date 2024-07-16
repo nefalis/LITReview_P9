@@ -6,25 +6,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="register-container mt-8 w-2/4">
+<div class="register-container mt-8 w-96">
     <h2 class="flex justify-center font-semibold text-2xl m-10">Inscrivez-vous</h2>
-    <form method="post">
+    <form method="post" class="w-10/12">
         {% csrf_token %}
-        <div class="register-username mb-10 w-full">
+        <div class="register-username mb-10 w-96">
             {{ form.username }}
             {% for error in form.username.errors %}
                 <p class="error">{{ error }}</p>
             {% endfor %}
         </div>
 
-        <div class="register-password1 mb-10 w-full">
+        <div class="register-password1 mb-10 w-96">
             {{ form.password1 }}
             {% for error in form.password1.errors %}
                 <p class="error">{{ error }}</p>
             {% endfor %}
         </div>
 
-        <div class="register-password2 mb-10 w-full">
+        <div class="register-password2 mb-10 w-96">
             {{ form.password2 }}
             {% for error in form.password2.errors %}
                 <p class="error">{{ error }}</p>

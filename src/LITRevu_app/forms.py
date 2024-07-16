@@ -21,19 +21,19 @@ class AuthenticationForm(AuthenticationForm):
 class registerForm(UserCreationForm):
     username = forms.CharField(
         widget=forms.TextInput(attrs={
-            'class': 'form-control border-4 border-tertiary rounded-md'
+            'class': 'form-control border-4 border-tertiary rounded-md '
             'w-full text-center',
             'placeholder': 'Nom d\'utilisateur'})
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'form-control border-4 border-tertiary rounded-md'
+            'class': 'form-control border-4 border-tertiary rounded-md '
             'w-full text-center',
             'placeholder': 'Mot de passe'})
     )
     password2 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'class': 'form-control border-4 border-tertiary rounded-md'
+            'class': 'form-control border-4 border-tertiary rounded-md '
             'w-full text-center',
             'placeholder': 'Confirmez le mot de passe'})
     )

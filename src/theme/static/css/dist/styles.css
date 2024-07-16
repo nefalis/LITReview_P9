@@ -1169,16 +1169,6 @@ select {
   letter-spacing: 0em;
 }
 
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
-}
-
 .text-star {
   --tw-text-opacity: 1;
   color: rgb(112 112 112 / var(--tw-text-opacity));
